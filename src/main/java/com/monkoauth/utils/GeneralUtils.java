@@ -8,7 +8,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
-import com.ForMonk2.model.ApiResponseModel;
+import com.monkoauth.model.ApiResponseModel;
 import com.monkoauth.constants.CollectionConstants;
 
 

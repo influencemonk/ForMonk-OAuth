@@ -13,7 +13,6 @@ import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.ForMonk2.entity.ProfileLink;
 import com.monkoauth.entity.SocialMaster;
 import com.monkoauth.repo.SocialMasterRepo;
 
