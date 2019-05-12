@@ -6,14 +6,11 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.monkoauth.constants.ApiConstants.RESPONSE;
-import com.monkoauth.dao.InfluencerMasterDao;
 import com.monkoauth.dao.SocialMasterDao;
 import com.monkoauth.dto.SaveTokensRequest;
 import com.monkoauth.dto.SaveTokensResponse;
-import com.monkoauth.entity.InfluencerMaster;
 import com.monkoauth.entity.SocialMaster;
 import com.monkoauth.model.ApiResponseModel;
-import com.monkoauth.model.SocialAccount;
 import com.monkoauth.model.SocialMasterCredential;
 
 public class OAuthDataHelper {
