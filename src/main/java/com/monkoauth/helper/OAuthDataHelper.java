@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import com.monkoauth.constants.ApiConstants.RESPONSE;
 import com.monkoauth.dao.SocialMasterDao;
@@ -13,6 +14,7 @@ import com.monkoauth.entity.SocialMaster;
 import com.monkoauth.model.ApiResponseModel;
 import com.monkoauth.model.SocialMasterCredential;
 
+@Component
 public class OAuthDataHelper {
 
 	@Autowired

@@ -11,12 +11,12 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
-import org.springframework.transaction.annotation.Transactional;
+import org.springframework.stereotype.Repository;
 
 import com.monkoauth.entity.SocialMaster;
 import com.monkoauth.repo.SocialMasterRepo;
 
-@Transactional
+@Repository
 public class SocialMasterDao implements SocialMasterRepo {
 
 	@Autowired

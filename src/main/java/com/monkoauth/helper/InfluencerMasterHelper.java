@@ -4,14 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.transaction.annotation.Transactional;
+import org.springframework.stereotype.Component;
 
 import com.monkoauth.dao.InfluencerMasterDao;
 import com.monkoauth.entity.InfluencerMaster;
 import com.monkoauth.model.SocialAccount;
 
 
-@Transactional
+@Component
 public class InfluencerMasterHelper {
 	
 	
