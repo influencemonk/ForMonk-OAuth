@@ -1,6 +1,7 @@
 package com.monkoauth.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -23,6 +24,9 @@ public class InstaOAuthController {
 	@Autowired
 	private OAuthDataHelper oAuthDataHelper;
 
+	@Value("${eureka.client.service-url.defaultZone}")
+	private String eurekaUrl;
+
 	@PutMapping("/saveTokens")
 	public @ResponseBody ResponseEntity<?> saveTokens(@RequestBody SaveTokensRequest request) {
 		
@@ -36,7 +40,7 @@ public class InstaOAuthController {
 	
 	@GetMapping("/ping")
 	public @ResponseBody ResponseEntity<?> ping(){
-		return new ResponseEntity<>(true , HttpStatus.OK);
+		return new ResponseEntity<>(eurekaUrl , HttpStatus.OK);
 	}
 	
 }
