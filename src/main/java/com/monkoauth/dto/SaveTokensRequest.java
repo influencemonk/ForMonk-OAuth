@@ -1,11 +1,13 @@
 package com.monkoauth.dto;
 
+import java.util.Date;
+
 public class SaveTokensRequest {
 	
 	private String accessToken;
 	private String refreshToken;
 	private String clientId;
-	private String expiresIn;
+	private Date expiresIn;
 	private String socialHandle;
 	private String socialHandleId;
 	
@@ -28,10 +30,10 @@ public class SaveTokensRequest {
 	public void setClientId(String clientId) {
 		this.clientId = clientId;
 	}
-	public String getExpiresIn() {
+	public Date getExpiresIn() {
 		return expiresIn;
 	}
-	public void setExpiresIn(String expiresIn) {
+	public void setExpiresIn(Date expiresIn) {
 		this.expiresIn = expiresIn;
 	}
 	public String getSocialHandle() {

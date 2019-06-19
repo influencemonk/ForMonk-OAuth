@@ -38,7 +38,7 @@ public class InstaOAuthController {
 		return new ResponseEntity<>(response , response.getError() ? HttpStatus.BAD_REQUEST : HttpStatus.OK);
 	}
 	
-	@GetMapping("/ping")
+	@GetMapping("/ping2")
 	public @ResponseBody ResponseEntity<?> ping(){
 		return new ResponseEntity<>(eurekaUrl , HttpStatus.OK);
 	}

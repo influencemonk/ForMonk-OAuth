@@ -1,6 +1,12 @@
 package com.monkoauth.model;
 
-public class SocialMasterCredential {
+import com.monkoauth.entity.SocialMasterBase;
+import org.springframework.data.mongodb.core.mapping.Document;
+
+import java.util.Date;
+
+@Document(collection = "SocialMaster")
+public class SocialMaster extends SocialMasterBase {
 	
 	private String accessToken;
 	private String refreshToken;
@@ -23,7 +29,7 @@ public class SocialMasterCredential {
 	public String getExpiresIn() {
 		return expiresIn;
 	}
-	public void setExpiresIn(String expriesIn) {
+	public void setExpiresIn(Date expriesIn) {
 		this.expiresIn = expiresIn;
 	}
 	public String getClientId() {

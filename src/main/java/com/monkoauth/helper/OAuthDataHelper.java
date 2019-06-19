@@ -1,8 +1,9 @@
 package com.monkoauth.helper;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Date;
 
+import com.monkoauth.entity.SocialMasterBase;
+import com.monkoauth.model.SocialMaster;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -10,9 +11,7 @@ import com.monkoauth.constants.ApiConstants.RESPONSE;
 import com.monkoauth.dao.SocialMasterDao;
 import com.monkoauth.dto.SaveTokensRequest;
 import com.monkoauth.dto.SaveTokensResponse;
-import com.monkoauth.entity.SocialMaster;
 import com.monkoauth.model.ApiResponseModel;
-import com.monkoauth.model.SocialMasterCredential;
 
 @Component
 public class OAuthDataHelper {
@@ -42,16 +41,16 @@ public class OAuthDataHelper {
 			// Get IMCId of the user:
 			String imcId = influencerMasterHelper.getIMCId(socialHandleId, socialHandle, clientId);
 			
-			SocialMaster smcRecord = socialMasterDao.findByImcId(imcId);
+			SocialMasterBase smcRecord = socialMasterDao.findByImcId(imcId);
 			
 			if(null == smcRecord) {
-				smcRecord = new SocialMaster();
+				smcRecord = new SocialMasterBase();
 				smcRecord.setImcId(imcId);
 			}
 			
 			String accessToken = request.getAccessToken();
 			String refreshToken = request.getRefreshToken();
-			String expiresIn = request.getExpiresIn();
+			Date expiresIn = request.getExpiresIn();
 			
 			// Save data in Social Master Collection:
 			saveOrUpdateRecord(smcRecord, accessToken, refreshToken, expiresIn, clientId, socialHandleId);
@@ -74,51 +73,54 @@ public class OAuthDataHelper {
 	/**
 	 * Method to save or update Social Master record with new access and refresh tokens
 	 * 
-	 * @param smcRecord
+	 * @param smsBase
 	 * @param accessToken
 	 * @param refreshToken
 	 * @param expiresIn
 	 * @param clientId
 	 * @param socialHandleId
 	 */
-	private void saveOrUpdateRecord(SocialMaster smcRecord, String accessToken, String refreshToken, String expiresIn,
-			String clientId, String socialHandleId) {
+	private void saveOrUpdateRecord(SocialMasterBase smsBase, String accessToken, String refreshToken, Date expiresIn,
+									String clientId, String socialHandleId) {
 		
 		// Prepare new SMC credential using new token details:
-		SocialMasterCredential smcCredential = new SocialMasterCredential();
-		smcCredential.setAccessToken(accessToken);
-		smcCredential.setClientId(clientId);
-		smcCredential.setExpiresIn(expiresIn);
-		smcCredential.setRefreshToken(refreshToken);
-		smcCredential.setSocialHandleId(socialHandleId);
+		SocialMaster smcMaster = new SocialMaster();
+		smcMaster.setAccessToken(accessToken);
+		smcMaster.setClientId(clientId);
+		smcMaster.setExpiresIn(expiresIn);
+		smcMaster.setRefreshToken(refreshToken);
+		smcMaster.setSocialHandleId(socialHandleId);
+		smcMaster.setId(smsBase.getId());
+		smcMaster.setImcId(smsBase.getImcId());
+
 		
-		List<SocialMasterCredential> smcCredentialList = smcRecord.getCredentials();
-		if(null != smcCredentialList) {
-			
-			boolean clientIdFound = false;
-			
-			for(int i = 0; i < smcCredentialList.size(); i++) {
-				SocialMasterCredential credential = smcCredentialList.get(i);
-				if(credential.getClientId().equals(clientId)) {
-					smcCredentialList.set(i, smcCredential);
-					clientIdFound = true;
-				}
-			}
-			
-			if(!clientIdFound) {
-				smcCredentialList.add(smcCredential);
-			}
-			
-		}
-		else {
-			smcCredentialList = new ArrayList<>();
-			smcCredentialList.add(smcCredential);
-		}
-		
-		smcRecord.setCredentials(smcCredentialList);
-		
-		// Save the data:
-		socialMasterDao.insert(smcRecord);
+//		List<SocialMaster> smcCredentialList = smcRecord.getCredentials();
+//		if(null != smcCredentialList) {
+//
+//			boolean clientIdFound = false;
+//
+//			for(int i = 0; i < smcCredentialList.size(); i++) {
+//				SocialMaster credential = smcCredentialList.get(i);
+//				if(credential.getClientId().equals(clientId)) {
+//					smcCredentialList.set(i, smcCredential);
+//					clientIdFound = true;
+//				}
+//			}
+//
+//			if(!clientIdFound) {
+//				smcCredentialList.add(smcCredential);
+//			}
+//
+//		}
+//		else {
+//			smcCredentialList = new ArrayList<>();
+//			smcCredentialList.add(smcCredential);
+//		}
+//
+//		smcRecord.setCredentials(smcCredentialList);
+//
+//		// Save the data:
+		socialMasterDao.insert(smcMaster);
 		
 	}
 	
