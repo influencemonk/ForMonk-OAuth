@@ -1,6 +1,7 @@
 package com.monkoauth.model;
 
 import com.monkoauth.entity.SocialMasterBase;
+import org.springframework.data.domain.Persistable;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.Date;
@@ -44,7 +45,5 @@ public class SocialMaster extends SocialMasterBase {
 	public void setSocialHandleId(String socialHandleId) {
 		this.socialHandleId = socialHandleId;
 	}
-	
-	
-	
+
 }

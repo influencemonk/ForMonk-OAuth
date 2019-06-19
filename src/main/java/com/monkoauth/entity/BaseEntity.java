@@ -1,33 +1,31 @@
 package com.monkoauth.entity;
 
-import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedBy;
 import org.springframework.data.annotation.LastModifiedDate;
 
 import java.util.Date;
 
-public class BaseEntity {
+public class BaseEntity  {
 
 	@CreatedDate
-	private Date createOn;
+	private Date createdOn;
 
 	@LastModifiedDate
-	private Date updateOn;
+	private Date updatedOn;
 
-	public Date getCreateOn() {
-		return createOn;
+	public Date getCreatedOn() {
+		return createdOn;
 	}
-	public void setCreateOn(Date createOn) {
-		this.createOn = createOn;
+	public void setCreatedOn(Date createdOn) {
+		this.createdOn = createdOn;
 	}
-	public Date getUpdateOn() {
-		return updateOn;
+	public Date getUpdatedOn() {
+		return updatedOn;
 	}
-	public void setUpdateOn(Date updateOn) {
-		this.updateOn = updateOn;
+	public void setUpdatedOn(Date updatedOn) {
+		this.updatedOn = updatedOn;
 	}
-	
-	
-	
+
+
+
 }
