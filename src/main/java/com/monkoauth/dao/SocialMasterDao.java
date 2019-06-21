@@ -174,7 +174,7 @@ public class SocialMasterDao implements SocialMasterRepo {
 				Aggregation.match(new Criteria().andOperator(
 						Criteria.where("socialHandleId").is(socialHandleId) ,
 						Criteria.where("clientId").is(clientId),
-						Criteria.where("createdOn").gte(Instant.now())
+						Criteria.where("expiryDate").gte(Instant.now())
 				));
 
 		Aggregation aggregation = Aggregation.newAggregation(matchSocialHandleId, sort, Aggregation.limit(1));
