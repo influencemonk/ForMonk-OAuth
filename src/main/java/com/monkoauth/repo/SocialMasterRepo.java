@@ -9,6 +9,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface SocialMasterRepo extends MongoRepository<SocialMaster, String> {
 
-	public SocialMaster findByImcId(String imcId);
-	
+	SocialMaster findByImcId(String imcId);
+
 }

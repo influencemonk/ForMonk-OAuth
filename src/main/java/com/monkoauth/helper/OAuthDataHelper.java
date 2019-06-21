@@ -76,55 +76,33 @@ public class OAuthDataHelper {
 	 * @param smsBase
 	 * @param accessToken
 	 * @param refreshToken
-	 * @param expiresIn
+	 * @param expiryDate
 	 * @param clientId
 	 * @param socialHandleId
 	 */
-	private void saveOrUpdateRecord(SocialMasterBase smsBase, String accessToken, String refreshToken, Date expiresIn,
+	private void saveOrUpdateRecord(SocialMasterBase smsBase, String accessToken, String refreshToken, Date expiryDate,
 									String clientId, String socialHandleId) {
 		
 		// Prepare new SMC credential using new token details:
 		SocialMaster smcMaster = new SocialMaster();
 		smcMaster.setAccessToken(accessToken);
 		smcMaster.setClientId(clientId);
-		smcMaster.setExpiresIn(expiresIn);
+		smcMaster.setExpiryDate(expiryDate);
 		smcMaster.setRefreshToken(refreshToken);
 		smcMaster.setSocialHandleId(socialHandleId);
 		smcMaster.setId(smsBase.getId());
 		smcMaster.setImcId(smsBase.getImcId());
-
-		
-//		List<SocialMaster> smcCredentialList = smcRecord.getCredentials();
-//		if(null != smcCredentialList) {
-//
-//			boolean clientIdFound = false;
-//
-//			for(int i = 0; i < smcCredentialList.size(); i++) {
-//				SocialMaster credential = smcCredentialList.get(i);
-//				if(credential.getClientId().equals(clientId)) {
-//					smcCredentialList.set(i, smcCredential);
-//					clientIdFound = true;
-//				}
-//			}
-//
-//			if(!clientIdFound) {
-//				smcCredentialList.add(smcCredential);
-//			}
-//
-//		}
-//		else {
-//			smcCredentialList = new ArrayList<>();
-//			smcCredentialList.add(smcCredential);
-//		}
-//
-//		smcRecord.setCredentials(smcCredentialList);
-//
-//		// Save the data:
 		socialMasterDao.insert(smcMaster);
-		
 	}
 	
-	
+	public SocialMaster findValidAuthToken(String clientId , String socialHandleId) {
+		try{
+			return socialMasterDao.findValidAuthToken(socialHandleId , clientId);
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return null;
+	}
 	
 	
 	

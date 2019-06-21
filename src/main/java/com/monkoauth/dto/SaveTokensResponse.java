@@ -1,16 +1,11 @@
 package com.monkoauth.dto;
 
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+
+@Data
+@EqualsAndHashCode(callSuper=true)
 public class SaveTokensResponse extends BaseResponse {
-	
-	private String imcId;
 
-	public String getImcId() {
-		return imcId;
-	}
-
-	public void setImcId(String imcId) {
-		this.imcId = imcId;
-	}
-	
-
+    private String imcId;
 }

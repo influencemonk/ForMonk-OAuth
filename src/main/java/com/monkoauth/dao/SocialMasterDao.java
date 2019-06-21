@@ -1,5 +1,6 @@
 package com.monkoauth.dao;
 
+import java.time.Instant;
 import java.util.List;
 import java.util.Optional;
 
@@ -10,11 +11,16 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.aggregation.Aggregation;
+import org.springframework.data.mongodb.core.aggregation.AggregationOperation;
+import org.springframework.data.mongodb.core.aggregation.AggregationResults;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Repository;
 
 import com.monkoauth.repo.SocialMasterRepo;
+
+import static com.fasterxml.jackson.core.JsonToken.FIELD_NAME;
 
 @Repository
 public class SocialMasterDao implements SocialMasterRepo {
@@ -160,4 +166,21 @@ public class SocialMasterDao implements SocialMasterRepo {
 		return mongoTemplate.findOne(query, SocialMaster.class);
 		
 	}
+
+	public SocialMaster findValidAuthToken(String socialHandleId , String clientId) {
+		AggregationOperation sort = Aggregation.sort(Sort.Direction.DESC, "createdOn");
+
+		AggregationOperation matchSocialHandleId =
+				Aggregation.match(new Criteria().andOperator(
+						Criteria.where("socialHandleId").is(socialHandleId) ,
+						Criteria.where("clientId").is(clientId),
+						Criteria.where("createdOn").gte(Instant.now())
+				));
+
+		Aggregation aggregation = Aggregation.newAggregation(matchSocialHandleId, sort, Aggregation.limit(1));
+		AggregationResults<SocialMaster> aggregationResults = mongoTemplate.aggregate(aggregation , "SocialMaster" , SocialMaster.class);
+		return aggregationResults.getUniqueMappedResult();
+	}
+
+
 }

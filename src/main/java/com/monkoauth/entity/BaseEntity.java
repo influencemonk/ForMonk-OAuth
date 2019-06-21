@@ -5,27 +5,37 @@ import org.springframework.data.annotation.LastModifiedDate;
 
 import java.util.Date;
 
-public class BaseEntity  {
 
-	@CreatedDate
-	private Date createdOn;
+public class BaseEntity {
 
-	@LastModifiedDate
-	private Date updatedOn;
+    @CreatedDate
+    private Date createdOn;
 
-	public Date getCreatedOn() {
-		return createdOn;
-	}
-	public void setCreatedOn(Date createdOn) {
-		this.createdOn = createdOn;
-	}
-	public Date getUpdatedOn() {
-		return updatedOn;
-	}
-	public void setUpdatedOn(Date updatedOn) {
-		this.updatedOn = updatedOn;
-	}
+    @LastModifiedDate
+    private Date updatedOn;
+    private boolean isArchived;
 
+    public Date getCreatedOn() {
+        return createdOn;
+    }
 
+    public void setCreatedOn(Date createdOn) {
+        this.createdOn = createdOn;
+    }
 
+    public Date getUpdatedOn() {
+        return updatedOn;
+    }
+
+    public void setUpdatedOn(Date updatedOn) {
+        this.updatedOn = updatedOn;
+    }
+
+    public boolean isArchived() {
+        return isArchived;
+    }
+
+    public void setArchived(boolean archived) {
+        isArchived = archived;
+    }
 }
