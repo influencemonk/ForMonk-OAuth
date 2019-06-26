@@ -15,6 +15,6 @@ ARG JAR_FILE=target/MonkOAuth-0.0.1-SNAPSHOT.jar
 # Add the application's jar to the container
 COPY ./build/libs/MonkOAuth-0.0.1-SNAPSHOT.jar ${JAR_FILE}
 WORKDIR target
-RUN ls
+
 # Run the jar file 
 CMD ["java","-jar","MonkOAuth-0.0.1-SNAPSHOT.jar"]
